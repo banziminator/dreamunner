@@ -32,4 +32,12 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = false;
         }
     }
+
+        private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Star"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
