@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private int score = 0;
+    public Text scoreText;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        score = 0;
+        scoreText.text = "Score: " + score.ToString();
     }
 
     void FixedUpdate()
@@ -38,6 +43,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Star"))
         {
             Destroy(other.gameObject);
+            score++;
+            scoreText.text = "Score: " + score.ToString();
         }
     }
 }
