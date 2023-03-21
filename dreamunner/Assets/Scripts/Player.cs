@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private int score = 0;
     public Text scoreText;
+    public int health = 5;
 
     void Start()
     {
@@ -28,11 +29,11 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = movement * moveSpeed;
 
-        if (movement.x < 0)
+        if(movement.x < 0)
         {
             spriteRenderer.flipX = true;
         }
-        else if (movement.x > 0)
+        else if(movement.x > 0)
         {
             spriteRenderer.flipX = false;
         }
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
         private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Star"))
+        if(other.CompareTag("Star"))
         {
             Destroy(other.gameObject);
             score++;
