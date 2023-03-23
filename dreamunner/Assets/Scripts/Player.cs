@@ -9,8 +9,9 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    private int score = 0;
     public Text scoreText;
+    public Text healthText; // added healthText field
+    private int score = 0;
     public int health = 5;
 
     void Start()
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         score = 0;
         scoreText.text = "Score: " + score.ToString();
+        healthText.text = "HP: " + health.ToString(); // set initial health text
     }
 
     void FixedUpdate()
@@ -45,7 +47,7 @@ public class Player : MonoBehaviour
         }
     }
 
-        private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Star"))
         {
@@ -53,5 +55,17 @@ public class Player : MonoBehaviour
             score++;
             scoreText.text = "Score: " + score.ToString();
         }
+
+        else if(other.CompareTag("Enemy"))
+        {
+            health--;
+            healthText.text = "HP: " + health.ToString();
+        }
+    }
+
+    public void LoseHealth() // method to decrease health and update healthText
+    {
+        health--;
+        healthText.text = "HP: " + health.ToString();
     }
 }
