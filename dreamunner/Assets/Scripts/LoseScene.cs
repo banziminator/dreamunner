@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoseScene : MonoBehaviour
+
 {
     public void RestartGame()
     {

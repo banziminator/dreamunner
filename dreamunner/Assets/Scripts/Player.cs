@@ -45,6 +45,12 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
+
+        Vector3 playerPos = Camera.main.WorldToViewportPoint(transform.position);
+
+        playerPos.x = Mathf.Clamp(playerPos.x, 0.0f, 1.0f);
+        playerPos.y = Mathf.Clamp(playerPos.y, 0.0f, 1.0f);
+        transform.position = Camera.main.ViewportToWorldPoint(playerPos);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
