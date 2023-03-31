@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 375577705}
   - component: {fileID: 375577704}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -429,8 +429,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 314.5083, y: 153}
-  m_SizeDelta: {x: 38.9834, y: 30}
+  m_AnchoredPosition: {x: 305.495, y: 153}
+  m_SizeDelta: {x: 57.0099, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375577704
 MonoBehaviour:
@@ -1096,7 +1096,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'On/Off
+
+'
 --- !u!222 &881431828
 CanvasRenderer:
   m_ObjectHideFlags: 0
