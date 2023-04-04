@@ -10,9 +10,12 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     public Text scoreText;
-    public Text healthText; // added healthText field
+    public Text healthText;
     private int score = 0;
     public int health = 5;
+    private AudioSource audioSource; // 22
+    public AudioClip hitSound; // 22
+    public AudioClip starDestroySound; // 22
 
     void Start()
     {
@@ -20,7 +23,8 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         score = 0;
         scoreText.text = "Score: " + score.ToString();
-        healthText.text = "HP: " + health.ToString(); // set initial health text
+        healthText.text = "HP: " + health.ToString();
+        audioSource = GetComponent<AudioSource>(); // 22
     }
 
     void FixedUpdate()
@@ -58,14 +62,17 @@ public class Player : MonoBehaviour
         if(other.CompareTag("Star"))
         {
             Destroy(other.gameObject);
+            audioSource.PlayOneShot(starDestroySound); // 22
             score++;
             scoreText.text = "Score: " + score.ToString();
         }
+
 
         else if(other.CompareTag("Enemy"))
         {
             health--;
             healthText.text = "HP: " + health.ToString();
+            audioSource.PlayOneShot(hitSound); // 22
         }
     }
 
