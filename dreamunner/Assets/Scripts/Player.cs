@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     {
         if(health <= 0)
         {
+            PlayerPrefs.SetInt("Score", score); // 33
             SceneManager.LoadScene("LoseScene");
         }
 
