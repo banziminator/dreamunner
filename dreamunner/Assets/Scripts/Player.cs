@@ -1,85 +1,86 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(AudioSource))] // 1
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Text scoreText = null;
+    [SerializeField] private Text healthText = null;
+    [SerializeField] private AudioClip hitSound = null; // 22
+    [SerializeField] private AudioClip starDestroySound = null; // 22
+    [SerializeField] private int health = 5;
+
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    public Text scoreText;
-    public Text healthText;
+    private AudioSource audioSource;
     private int score = 0;
-    public int health = 5;
-    private AudioSource audioSource; // 22
-    public AudioClip hitSound; // 22
-    public AudioClip starDestroySound; // 22
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        score = 0;
-        scoreText.text = "Score: " + score.ToString();
-        healthText.text = "HP: " + health.ToString();
-        audioSource = GetComponent<AudioSource>(); // 22
+        audioSource = GetComponent<AudioSource>();
     }
 
-    void FixedUpdate()
+    private void Start()
     {
-        if(health <= 0)
+        scoreText.text = "Score: " + score;
+        healthText.text = "HP: " + health;
+    }
+
+    private void Update()
+    {
+        if (health <= 0)
         {
             PlayerPrefs.SetInt("Score", score); // 33
             SceneManager.LoadScene("LoseScene");
         }
+    }
 
+    private void FixedUpdate()
+    {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
-
         Vector2 movement = new Vector2(moveHorizontal, moveVertical).normalized;
-
         rb.velocity = movement * moveSpeed;
 
-        if(movement.x < 0)
+        if (movement.x < 0)
         {
             spriteRenderer.flipX = true;
         }
-        else if(movement.x > 0)
+        else if (movement.x > 0)
         {
             spriteRenderer.flipX = false;
         }
 
         Vector3 playerPos = Camera.main.WorldToViewportPoint(transform.position);
-
-        playerPos.x = Mathf.Clamp(playerPos.x, 0.0f, 1.0f);
-        playerPos.y = Mathf.Clamp(playerPos.y, 0.0f, 1.0f);
+        playerPos.x = Mathf.Clamp01(playerPos.x);
+        playerPos.y = Mathf.Clamp01(playerPos.y);
         transform.position = Camera.main.ViewportToWorldPoint(playerPos);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Star"))
+        if (other.CompareTag("Star"))
         {
             Destroy(other.gameObject);
-            audioSource.PlayOneShot(starDestroySound); // 22
+            audioSource.PlayOneShot(starDestroySound);
             score++;
-            scoreText.text = "Score: " + score.ToString();
+            scoreText.text = "Score: " + score;
         }
-
-
-        else if(other.CompareTag("Enemy"))
+        else if (other.CompareTag("Enemy"))
         {
             health--;
-            healthText.text = "HP: " + health.ToString();
-            audioSource.PlayOneShot(hitSound); // 22
+            healthText.text = "HP: " + health;
+            audioSource.PlayOneShot(hitSound);
         }
     }
 
-    public void LoseHealth() // method to decrease health and update healthText
+    public void LoseHealth()
     {
         health--;
-        healthText.text = "HP: " + health.ToString();
+        healthText.text = "HP: " + health;
     }
 }
