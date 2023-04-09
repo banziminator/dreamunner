@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class StarSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject obj;
-    float RandX;
-    Vector2 whereToSpawn;
+    [SerializeField] private GameObject starPrefab;
+    [SerializeField] private float spawnRate = 2f;
+    [SerializeField] private float spawnRangeX = 7.34f;
 
-    [SerializeField]
-    private float spawnRate = 2f;
-    float nextSpawn = 0.0f;
+    private float nextSpawnTime;
 
-    void Update()
+    private void Update()
     {
-        if(Time.time > nextSpawn)
+        if (Time.time > nextSpawnTime)
         {
-            nextSpawn = Time.time + spawnRate;
-            RandX = Random.Range(-7.34f, 7.33f);
-            whereToSpawn = new Vector2(RandX, transform.position.y);
-            Instantiate(obj, whereToSpawn, Quaternion.identity);
+            SpawnStar();
+            nextSpawnTime = Time.time + spawnRate;
         }
+    }
+
+    private void SpawnStar()
+    {
+        float randomX = Random.Range(-spawnRangeX, spawnRangeX);
+        Vector2 spawnPosition = new Vector2(randomX, transform.position.y);
+        Instantiate(starPrefab, spawnPosition, Quaternion.identity);
     }
 }

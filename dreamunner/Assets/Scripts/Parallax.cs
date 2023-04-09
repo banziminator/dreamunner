@@ -1,21 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    public float speed;
-    public float endX;
-    public float startX;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float endX = -20f;
+    [SerializeField] private float startX = 20f;
 
     private void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
-        
-        if(transform.position.x <= endX)
+
+        if (transform.position.x <= endX)
         {
-            Vector2 pos = new Vector2(startX, transform.position.y);
-            transform.position = pos;
+            transform.position = new Vector2(startX, transform.position.y);
         }
     }
 }

@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(AudioSource))] // 1
+[RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(AudioSource))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Text scoreText = null;
     [SerializeField] private Text healthText = null;
-    [SerializeField] private AudioClip hitSound = null; // 22
-    [SerializeField] private AudioClip starDestroySound = null; // 22
+    [SerializeField] private AudioClip hitSound = null;
+    [SerializeField] private AudioClip starDestroySound = null;
     [SerializeField] private int health = 5;
 
     private Rigidbody2D rb;
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     {
         if (health <= 0)
         {
-            PlayerPrefs.SetInt("Score", score); // 33
+            PlayerPrefs.SetInt("Score", score);
             SceneManager.LoadScene("LoseScene");
         }
     }
