@@ -72,7 +72,6 @@ public class Player : MonoBehaviour
         }
         else if (other.CompareTag("Enemy"))
         {
-            health--;
             healthText.text = "HP: " + health;
             audioSource.PlayOneShot(hitSound);
         }
