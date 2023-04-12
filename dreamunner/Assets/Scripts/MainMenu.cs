@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
+        PlayerPrefs.DeleteKey("Score");
         SceneManager.LoadScene("GameScene");
     }
 

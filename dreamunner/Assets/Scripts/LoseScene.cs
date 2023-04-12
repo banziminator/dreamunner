@@ -11,12 +11,16 @@ public class LoseScene : MonoBehaviour
     
     void Start()
     {
-        int score = PlayerPrefs.GetInt("Score"); // retrieve the score from PlayerPrefs
-        scoreText.text = "Score: " + score.ToString(); // display the score in the text field
+        int score = PlayerPrefs.GetInt("Score");
+        if (scoreText != null)
+        {
+        scoreText.text = "Score: " + score.ToString();
+        }
     }
 
     public void RestartGame()
     {
+        PlayerPrefs.DeleteKey("Score");
         SceneManager.LoadScene("GameScene");
     }
 }
