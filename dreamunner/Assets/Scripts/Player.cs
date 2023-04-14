@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -61,6 +62,18 @@ public class Player : MonoBehaviour
         transform.position = Camera.main.ViewportToWorldPoint(playerPos);
     }
 
+    private IEnumerator BlinkHealthText()
+    {
+        // Blink the health text red
+        for (int i = 0; i < 6; i++)
+        {
+            healthText.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            healthText.color = Color.yellow;
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Star"))
@@ -72,8 +85,9 @@ public class Player : MonoBehaviour
         }
         else if (other.CompareTag("Enemy"))
         {
-            healthText.text = "HP: " + health;
+            LoseHealth();
             audioSource.PlayOneShot(hitSound);
+            StartCoroutine(BlinkHealthText());
         }
     }
 
