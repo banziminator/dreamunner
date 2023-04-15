@@ -87,13 +87,15 @@ public class Player : MonoBehaviour
         {
             LoseHealth();
             audioSource.PlayOneShot(hitSound);
+            health--;
             StartCoroutine(BlinkHealthText());
+            healthText.text = "HP: " + health;
         }
     }
 
     public void LoseHealth()
     {
-        health--;
-        healthText.text = "HP: " + health;
+        
+
     }
 }
