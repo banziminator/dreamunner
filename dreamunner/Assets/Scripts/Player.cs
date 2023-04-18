@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
     private int score = 0;
+    private int highScore = 0;
+    private string highScoreKey = "Highscore";
 
     private void Awake()
     {
@@ -27,15 +29,22 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        score = PlayerPrefs.GetInt("Score", 0);
+        highScore = PlayerPrefs.GetInt(highScoreKey, 0);
         scoreText.text = "Score: " + score;
         healthText.text = "HP: " + health;
     }
 
     private void Update()
     {
-        if (health <= 0)
+       if (health <= 0)
         {
             PlayerPrefs.SetInt("Score", score);
+            if (score > highScore)
+            {
+                highScore = score;
+                PlayerPrefs.SetInt(highScoreKey, highScore);
+            }
             SceneManager.LoadScene("LoseScene");
         }
     }
@@ -64,7 +73,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator BlinkHealthText()
     {
-        // Blink the health text red
         for (int i = 0; i < 6; i++)
         {
             healthText.color = Color.red;

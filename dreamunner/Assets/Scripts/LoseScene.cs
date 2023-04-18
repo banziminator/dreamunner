@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class LoseScene : MonoBehaviour
-
 {
-    public Text scoreText;
-    
-    void Start()
-    {
-        int score = PlayerPrefs.GetInt("Score");
-        if (scoreText != null)
-        {
-        scoreText.text = "Score: " + score.ToString();
-        }
-    }
+    [SerializeField] private Text scoreText = null;
+    [SerializeField] private Text highScoreText = null;
 
-    public void RestartGame()
+    private int score = 0;
+    private int highScore = 0;
+    private string highScoreKey = "Highscore";
+
+    private void Start()
     {
-        PlayerPrefs.DeleteKey("Score");
-        SceneManager.LoadScene("GameScene");
+        score = PlayerPrefs.GetInt("Score", 0);
+        highScore = PlayerPrefs.GetInt(highScoreKey, 0);
+        scoreText.text = "Score: " + score;
+
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt(highScoreKey, highScore);
+        }
+        highScoreText.text = "High Score: " + highScore;
     }
 }
