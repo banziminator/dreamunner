@@ -910,7 +910,8 @@ GameObject:
   - component: {fileID: 836406200}
   - component: {fileID: 836406199}
   - component: {fileID: 836406198}
-  - component: {fileID: 836406197}
+  - component: {fileID: 836406201}
+  - component: {fileID: 836406202}
   m_Layer: 5
   m_Name: Music
   m_TagString: Untagged
@@ -938,19 +939,6 @@ RectTransform:
   m_AnchoredPosition: {x: 848, y: 423.72876}
   m_SizeDelta: {x: 38.4459, y: 33.6125}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &836406197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836406195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f9c039977d14d07958647909d7f8d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOn: 0
 --- !u!114 &836406198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,9 +983,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 836406197}
+      - m_Target: {fileID: 836406202}
         m_TargetAssemblyTypeName: Audio, Assembly-CSharp
         m_MethodName: OnOffSounds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 836406201}
+        m_TargetAssemblyTypeName: MusicButton, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1045,6 +1045,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836406195}
   m_CullTransparentMesh: 1
+--- !u!114 &836406201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836406195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac5477c57e6e45859955645f29ac5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newSprite: {fileID: 8972043204431142000, guid: 236587ec711348a4792e0060efb1bf73, type: 3}
+  oldSprite: {fileID: 6654480115122583143, guid: 236587ec711348a4792e0060efb1bf73, type: 3}
+--- !u!114 &836406202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836406195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f9c039977d14d07958647909d7f8d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
 --- !u!1 &1038168292
 GameObject:
   m_ObjectHideFlags: 0
