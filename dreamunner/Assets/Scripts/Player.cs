@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(SpriteRenderer), typeof(AudioSource))]
 public class Player : MonoBehaviour
@@ -37,50 +37,57 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-       if (health <= 0)
-        {
-            PlayerPrefs.SetInt("Score", score);
-            if (score > highScore)
-            {
-                highScore = score;
-                PlayerPrefs.SetInt(highScoreKey, highScore);
-            }
-            SceneManager.LoadScene("LoseScene");
-        }
+        CheckIfDead();
     }
 
     private void FixedUpdate()
+    {
+        MovePlayer();
+        ClampPlayerPosition();
+    }
+
+    private void MovePlayer()
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical).normalized;
         rb.velocity = movement * moveSpeed;
 
-        if (movement.x < 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (movement.x > 0)
-        {
-            spriteRenderer.flipX = false;
-        }
+        spriteRenderer.flipX = moveHorizontal < 0 ? true : false;
+    }
 
+    private void ClampPlayerPosition()
+    {
         Vector3 playerPos = Camera.main.WorldToViewportPoint(transform.position);
-        playerPos.x = Mathf.Clamp01(playerPos.x);
-        playerPos.y = Mathf.Clamp01(playerPos.y);
         playerPos.x = Mathf.Clamp(playerPos.x, 0.1f, 0.9f);
         playerPos.y = Mathf.Clamp(playerPos.y, 0.1f, 0.9f);
         transform.position = Camera.main.ViewportToWorldPoint(playerPos);
+    }
 
+    private void CheckIfDead()
+    {
+        if (health <= 0)
+        {
+            SaveScore();
+            SceneManager.LoadScene("LoseScene");
+        }
+    }
+
+    private void SaveScore()
+    {
+        PlayerPrefs.SetInt("Score", score);
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt(highScoreKey, highScore);
+        }
     }
 
     private IEnumerator BlinkHealthText()
     {
         for (int i = 0; i < 6; i++)
         {
-            healthText.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            healthText.color = Color.yellow;
+            healthText.color = i % 2 == 0 ? Color.red : Color.yellow;
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -106,7 +113,6 @@ public class Player : MonoBehaviour
 
     public void LoseHealth()
     {
-        
-
+        // To be implemented
     }
 }

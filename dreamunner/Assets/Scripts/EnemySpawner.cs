@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] enemyVariants;
-    public float startTimeBtwSpawn = 2f;
-    public float decreaseTime = 0.1f;
-    public float minTime = 0.65f;
+    [SerializeField] private GameObject[] enemyVariants;
+    [SerializeField] private float startTimeBtwSpawn = 2f;
+    [SerializeField] private float decreaseTime = 0.1f;
+    [SerializeField] private float minTime = 0.65f;
 
     private float timeBtwSpawn;
 
@@ -18,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
             int rand = Random.Range(0, enemyVariants.Length);
             Instantiate(enemyVariants[rand], transform.position, Quaternion.identity);
             timeBtwSpawn = startTimeBtwSpawn;
+
             if (startTimeBtwSpawn > minTime)
             {
                 startTimeBtwSpawn -= decreaseTime;
