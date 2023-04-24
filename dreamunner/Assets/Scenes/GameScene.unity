@@ -305,7 +305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 312.7, y: 202.9}
+  m_AnchoredPosition: {x: 312.7, y: 182.86}
   m_SizeDelta: {x: 38.4459, y: 33.6125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375577705
@@ -426,8 +426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac5477c57e6e45859955645f29ac5e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSprite: {fileID: 8972043204431142000, guid: 236587ec711348a4792e0060efb1bf73, type: 3}
-  oldSprite: {fileID: 6654480115122583143, guid: 236587ec711348a4792e0060efb1bf73, type: 3}
+  newSprite: {fileID: 6654480115122583143, guid: 236587ec711348a4792e0060efb1bf73, type: 3}
+  oldSprite: {fileID: 8972043204431142000, guid: 236587ec711348a4792e0060efb1bf73, type: 3}
 --- !u!114 &375577709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,7 +887,7 @@ Rigidbody2D:
   m_Constraints: 0
 --- !u!95 &876861543
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -904,7 +904,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &876861544
 BoxCollider2D:
   m_ObjectHideFlags: 0
