@@ -21,6 +21,6 @@ public class LoseScene : MonoBehaviour
             highScore = score;
             PlayerPrefs.SetInt(highScoreKey, highScore);
         }
-        highScoreText.text = "High Score: " + highScore;
+        highScoreText.text = "Highscore: " + highScore;
     }
 }

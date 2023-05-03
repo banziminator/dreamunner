@@ -1,8 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemyVariants;
+    [SerializeField] private GameObject enemy;
     [SerializeField] private float startTimeBtwSpawn = 2f;
     [SerializeField] private float decreaseTime = 0.1f;
     [SerializeField] private float minTime = 0.65f;
